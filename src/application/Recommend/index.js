@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { forceCheck } from 'react-lazyload'
 import Slider from '../../components/slider/'
 import { connect } from 'react-redux'
 import * as actionTypes from './store/actionCreators'
@@ -22,7 +23,7 @@ function Recommend(props) {
 
   return (
     <Content>
-      <Scroll>
+      <Scroll onScroll={forceCheck}>
         <div>
           <Slider bannerList={bannerListJS}></Slider>
           <RecommendList recommendList={recommendListJS}></RecommendList>
