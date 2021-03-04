@@ -49,7 +49,7 @@ function Horizen(props) {
   }, [])
 
   return (
-    <Scroll direction={'horizontal'}>
+    <Scroll direction={'horizental'}>
       <div ref={Category}>
         <List>
           <span>{title}</span>
