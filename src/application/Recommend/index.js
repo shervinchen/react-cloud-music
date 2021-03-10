@@ -7,6 +7,7 @@ import RecommendList from '../../components/list/'
 import Scroll from '../../baseUI/scroll/index'
 import { Content } from './style'
 import Loading from '../../baseUI/loading/index'
+import { renderRoutes } from 'react-router-config'
 
 function Recommend(props) {
   const { bannerList, recommendList, enterLoading } = props
@@ -16,11 +17,11 @@ function Recommend(props) {
   useEffect(() => {
     // 如果页面有数据，则不发请求
     // immutable 数据结构中长度属性 size
-    if (!bannerList.size){
-      getBannerDataDispatch();
+    if (!bannerList.size) {
+      getBannerDataDispatch()
     }
-    if (!recommendList.size){
-      getRecommendListDataDispatch();
+    if (!recommendList.size) {
+      getRecommendListDataDispatch()
     }
     //eslint-disable-next-line
   }, [])
@@ -37,6 +38,7 @@ function Recommend(props) {
         </div>
       </Scroll>
       {enterLoading ? <Loading></Loading> : null}
+      {renderRoutes(props.route.routes)}
     </Content>
   )
 }
