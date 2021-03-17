@@ -27,6 +27,7 @@ function Singers(props) {
     pullUpLoading,
     pullDownLoading,
     pageCount,
+    songsCount,
   } = props
 
   const {
@@ -46,6 +47,9 @@ function Singers(props) {
     }
     // eslint-disable-next-line
   }, [])
+  const enterDetail = (id) => {
+    props.history.push(`/singers/${id}`)
+  }
 
   let handleUpdateAlpha = (val) => {
     dispatch({ type: CHANGE_ALPHA, data: val })
@@ -65,17 +69,16 @@ function Singers(props) {
     pullDownRefreshDispatch(category, alpha)
   }
 
-  const enterDetail = (id)  => {
-    props.history.push (`/singers/${id}`);
-  }
-
   const renderSingerList = () => {
     const list = singerList ? singerList.toJS() : []
     return (
       <List>
         {list.map((item, index) => {
           return (
-            <ListItem key={item.accountId + '' + index} onClick={() => enterDetail(item.id)}>
+            <ListItem
+              key={item.accountId + '' + index}
+              onClick={() => enterDetail(item.id)}
+            >
               <div className='img_wrapper'>
                 <LazyLoad
                   placeholder={
@@ -119,7 +122,7 @@ function Singers(props) {
             oldVal={alpha}
           ></Horizen>
         </NavContainer>
-        <ListContainer>
+        <ListContainer play={songsCount}>
           <Scroll
             pullUp={handlePullUp}
             pullDown={handlePullDown}
@@ -132,7 +135,7 @@ function Singers(props) {
           <Loading show={enterLoading}></Loading>
         </ListContainer>
       </Data>
-      { renderRoutes(props.route.routes) }
+      {renderRoutes(props.route.routes)}
     </div>
   )
 }
@@ -143,6 +146,7 @@ const mapStateToProps = (state) => ({
   pullUpLoading: state.getIn(['singers', 'pullUpLoading']),
   pullDownLoading: state.getIn(['singers', 'pullDownLoading']),
   pageCount: state.getIn(['singers', 'pageCount']),
+  songsCount: state.getIn(['player', 'playList']).size,
 })
 const mapDispatchToProps = (dispatch) => {
   return {
