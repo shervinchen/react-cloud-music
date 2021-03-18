@@ -6,6 +6,7 @@ import Singers from '../application/Singers'
 import Singer from '../application/Singer'
 import Rank from '../application/Rank'
 import Album from '../application/Album'
+import Search from '../application/Search'
 
 const routers = [
   {
@@ -48,6 +49,18 @@ const routers = [
             component: Album,
           },
         ],
+      },
+      {
+        path: '/album/:id',
+        exact: true,
+        key: 'album',
+        component: Album,
+      },
+      {
+        path: '/search',
+        exact: true,
+        key: 'search',
+        component: Search,
       },
     ],
   },
